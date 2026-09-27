@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('tenants', TenantController::class);
     Route::resource('room-types', RoomTypeController::class);
+    Route::resource('rooms', RoomController::class);
 });
 
 
