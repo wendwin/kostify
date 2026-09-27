@@ -50,11 +50,36 @@
         dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
 
             {{-- Table Header --}}
-            <div class="mb-4 flex items-center justify-end">
+            <div class="mb-4 flex items-center justify-between gap-4">
+                {{-- Filter Tipe Kamar --}}
+                <div class="flex items-center gap-1 rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
 
+                    {{-- Semua --}}
+                    <a href="{{ route('rooms.index') }}"
+                        class="rounded-md px-4 py-2 text-sm font-medium
+        {{ !request('type')
+            ? 'bg-white text-gray-800 shadow-sm dark:bg-gray-700 dark:text-white'
+            : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white' }}">
+                        Semua
+                    </a>
+
+                    {{-- Tipe Kamar --}}
+                    @foreach ($roomTypes as $roomType)
+                        <a href="{{ route('rooms.index', ['type' => strtolower($roomType->name)]) }}"
+                            class="rounded-md px-4 py-2 text-sm font-medium
+            {{ strtolower(request('type')) === strtolower($roomType->name)
+                ? 'bg-white text-gray-800 shadow-sm dark:bg-gray-700 dark:text-white'
+                : 'text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white' }}">
+                            {{ $roomType->name }}
+                        </a>
+                    @endforeach
+
+                </div>
+
+                {{-- Tambah --}}
                 <a href="{{ route('rooms.create') }}"
                     class="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5
-                text-theme-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
+            text-theme-sm font-medium text-white shadow-theme-xs hover:bg-brand-600">
                     Tambah Kamar
                 </a>
 
@@ -64,7 +89,6 @@
             <div class="max-w-full overflow-x-auto custom-scrollbar">
 
                 <table class="min-w-full">
-
                     <thead>
                         <tr class="border-t border-gray-100 dark:border-gray-800">
 
@@ -201,6 +225,12 @@
                     </tbody>
 
                 </table>
+
+                @if ($rooms->hasPages())
+                    <div class="mt-4 border-t border-gray-100 pt-4 dark:border-gray-800">
+                        {{ $rooms->links() }}
+                    </div>
+                @endif
             </div>
         </div>
 

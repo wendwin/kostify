@@ -11,13 +11,26 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rooms = Room::with('roomType')->latest()->get();
+        $query = Room::with('roomType')
+            ->latest();
+
+        if ($request->filled('type')) {
+            $query->whereHas('roomType', function ($query) use ($request) {
+                $query->whereRaw('LOWER(name) = ?', [strtolower($request->type)]);
+            });
+        }
+
+        $rooms = $query
+            ->paginate(10)
+            ->withQueryString();
+
+        $roomTypes = RoomType::orderBy('name')->get();
 
         return view('rooms.index', [
             'title' => 'Room'
-        ], compact('rooms'));
+        ], compact('rooms', 'roomTypes'));
     }
 
     /**
