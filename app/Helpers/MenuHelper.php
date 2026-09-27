@@ -16,7 +16,7 @@ class MenuHelper
                 'icon' => 'dashboard',
                 'name' => 'Manajemen',
                 'subItems' => [
-                    ['name' => 'Penghuni', 'path' => '/penghuni'],
+                    ['name' => 'Penghuni', 'path' => '/tenants'],
                     ['name' => 'Kamar', 'path' => '/kamar'],
                 ],
             ],

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,13 +18,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tenants', TenantController::class);
+});
+
 
 
 
 // Locale Switch Route
 // Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
-use App\Http\Controllers\DashboardController;
 
 // dashboard pages
 // Route::get('/', function () {
