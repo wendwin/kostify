@@ -17,7 +17,7 @@ class MenuHelper
                 'name' => 'Manajemen',
                 'subItems' => [
                     ['name' => 'Penghuni', 'path' => '/tenants'],
-                    ['name' => 'Kamar', 'path' => '/kamar'],
+                    ['name' => 'Kamar', 'path' => '/rooms'],
                 ],
             ],
 

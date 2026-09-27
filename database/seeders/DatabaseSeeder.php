@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
+use Database\Seeders\RoomSeeder;
+use Database\Seeders\RoomTypeSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
+            RoomTypeSeeder::class,
+            RoomSeeder::class,
         ]);
 
         $owner = Role::where('name', 'owner')->first();
